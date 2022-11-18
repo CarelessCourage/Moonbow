@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Image from "./Image.vue";
+import Moon from "./Moon.vue";
 
 const images = [
   "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1566&q=80",
@@ -25,13 +25,13 @@ const images = [
 
 <template>
   <div class="banner">
-    <Image :src="images[0]" :width="1900" :height="1200" :speed="1.5"/>
+    <Moon :src="images[0]" :width="1900" :height="1200" :speed="1.5"/>
   </div>
   <div class="page">
     <h1 class="title">Samsons World</h1>
     <div class="images">
       <div v-for="image in images" class="image-container" :key="image">
-        <Image :src="image" />
+        <Moon :src="image" />
         <div class="meta">
           <h3>Title</h3>
           <p>date</p>
