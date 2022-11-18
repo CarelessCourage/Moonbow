@@ -43,9 +43,11 @@ const images = [
 </template>
 
 <style lang="scss">
-  .title {
-    margin: 100px 0px;
-  }
+@import "../css";
+
+.title {
+  margin: 100px 0px;
+}
 
 .images {
   display: grid;

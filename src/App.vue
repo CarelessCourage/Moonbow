@@ -6,7 +6,4 @@ import Example from "./components/Example.vue";
   <Example />
 </template>
 
-<style lang="scss">
-@import "./css";
-</style>
 
