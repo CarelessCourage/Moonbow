@@ -1,0 +1,19 @@
+//General logic for a page container
+.page {
+  --page-width: calc(100vw - var(--space-familiar))
+  max-width: var(--page-width);
+  width: 1200px;
+  margin: auto;
+  padding-top: var(--outerspace);
+  padding-bottom: var(--outerspace);
+}
+
+.type-wrapper {
+  display: grid;
+  gap: var(--space-seperate);
+
+  section {
+    display: grid;
+    gap: var(--space-familiar);
+  }
+}

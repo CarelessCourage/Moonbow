@@ -1,0 +1,8 @@
+:root {
+  --space: 16px;
+  --space-intimate: calc(var(--space) / 4);
+  --space-familiar: var(--space);
+  --space-seperate: calc(var(--space) * 2);
+  --space-divorced: calc(var(--space) * 4);
+  --outerspace: calc(var(--space) * 6);
+}
