@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Three from "./components/Three.vue";
+import Example from "./components/Example.vue";
 </script>
 
 <template>
-  <Three />
+  <Example />
 </template>
 
 <style lang="scss">
