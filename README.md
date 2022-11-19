@@ -1,6 +1,8 @@
 # Moonbow :new_moon_with_face:+:rainbow:
 Vue component for adding GLSL to images :fire::fire::fire:
 
+> :warning: This package is in very early alpha and likley wont work in its current state
+
 ## :package: Installation
 ```bash
 npm install moonbow
