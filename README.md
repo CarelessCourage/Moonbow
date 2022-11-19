@@ -3,7 +3,7 @@ Vue component for adding GLSL to images :fire::fire::fire:
 
 ## :package: Installation
 ```bash
-npm install ...
+npm install moonbow
 ```
 
 ## :crystal_ball: Usage

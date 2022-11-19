@@ -4,6 +4,10 @@
   "description": "Vue component for adding GLSL to images",
   "author": "Samuel M. Bednarz<https://github.com/CarelessCourage>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CarelessCourage/Moonbow"
+  },
   "type": "module",
   "files": [
     "dist"
