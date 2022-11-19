@@ -102,7 +102,7 @@ const images = [
 canvas {
   position: fixed;
   top: 0px; left: 0px;
-  z-index: -1;
+  z-index: 0;
   max-width: 100vw;
   user-select: none;
   pointer-events: none;

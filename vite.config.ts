@@ -19,7 +19,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'Moonbow',
       // the proper extensions will be added
-      fileName: (format) => `${format}.js`
+      fileName: `moonbow`
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

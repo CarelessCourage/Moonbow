@@ -52,6 +52,11 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+.img-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
 img {
   opacity: 0.2;
   object-fit: cover;
