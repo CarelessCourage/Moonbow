@@ -1,16 +1,23 @@
 # Moonbow :new_moon_with_face:+:rainbow:
-Vue component for adding GLSL to images :fire::fire::fire:
-
-> How? Moonbow does this by leveraging three.js to create a 3D space in webGL. It creates a 3 dimensional plane for each image which sticks to the size and position of the HTML img element. Then it checks which images are inside the viewport using an intersection observer and for each image in view will update size and position on each animation frame to align with its hidden HTML img element. 
-
-Benefits of this approach. This lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Since images can be both in the HTML - taking up space and flowing with your layout as expected while still taking advantage of GLSL in the 3D proxy. This is also great for accessibility since it means we can accomplish complex image manipulation without sacrificing on the browser inbuilt accessibility tools.
-
+Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire:
 > :warning: This package is in very early alpha and likley wont work in its current state
-
 
 ## :package: Installation
 ```bash
 npm install moonbow
+```
+
+## :building_construction: Setup
+You can inject GLSL as a string but if you want to actually use it you're going to want to store GLSL in files that you can import. In order to do that you need to let Vite know how to handle GLSL files though. Import the [vite-plugin-glsl](https://github.com/UstymUkhman/vite-plugin-glsl) package and register it as a plugin in your vite.config file.
+
+```js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import glsl from 'vite-plugin-glsl'
+
+export default defineConfig({
+  plugins: [vue(), glsl()],
+})
 ```
 
 ## :crystal_ball: Usage
@@ -48,3 +55,17 @@ onMounted(() => {
   </div>
 </template>
 ```
+
+## :alembic: How it works
+> Moonbow does this by leveraging [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image which sticks to the size and position of the HTML img element. Then it checks which images are inside the viewport using an intersection observer and for each image in view will update size and position on each animation frame to align with its hidden HTML img element. 
+
+- :kissing_cat: ***Simple*** - Just a simple image component needed. Nothing more
+- :muscle: ***Flexible*** - Flexible primitives underneath that let you build your own logic
+- :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content so canvas image flows with the HTML elements
+- :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts so you dont lose accessibility controls like other approaches would
+
+#### :test_tube: Benefits of this approach
+This lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Since images can be both in the HTML - taking up space and flowing with your layout as expected while still taking advantage of GLSL in the 3D proxy. This is also great for accessibility since it means we can accomplish complex image manipulation without sacrificing on the browser inbuilt accessibility tools.
+
+## :scroll: Resources
+Learn how to write GLSL: [Book of Shaders](https://thebookofshaders.com/)
