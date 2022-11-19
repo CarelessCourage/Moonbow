@@ -1,7 +1,10 @@
 # Moonbow :new_moon_with_face:+:rainbow:
 Vue component for adding GLSL to images :fire::fire::fire:
 
+> How? Moonbow does this by leveraging three.js to create a 3D space in webGL. It crates a 3 dimentional plane for each image which sticks to the size and position of the HTML img element. Then it checks which images are inside the viewport using an intersection observer and for each image in view will update size and poistion to align with its hidden HTML img element. This lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Since images can be both in the HTML, taking up space and flowing with your layout as expected and also giving accesibility info. While still taking advatage of GLSL in the 3D proxy. 
+
 > :warning: This package is in very early alpha and likley wont work in its current state
+
 
 ## :package: Installation
 ```bash
