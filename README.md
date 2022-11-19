@@ -1,12 +1,12 @@
 # Moonbow :new_moon_with_face:+:rainbow:
 Vue component for adding GLSL to images :fire::fire::fire:
 
-## Installation
+## :package: Installation
 ```bash
 npm install ...
 ```
 
-## Usage
+## :crystal_ball: Usage
 
 ```vue
 <script setup lang="ts">
@@ -19,7 +19,7 @@ const imageURL = "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?i
 </template>
 ```
 
-## Primitives
+## :dna: Primitives
 ```vue
 <script setup>
 import { ref, onMounted  } from "vue"
