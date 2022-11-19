@@ -10,8 +10,8 @@ npm install moonbow
 
 ```vue
 <script setup lang="ts">
-import Moon from "./Moon.vue";
-const imageURL = "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1566&q=80"
+import Moon from "moonbow";
+const imageURL = "https://images.unsplash.com/photo-1642059893618"
 </script>
 
 <template>
@@ -23,10 +23,7 @@ const imageURL = "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?i
 ```vue
 <script setup>
 import { ref, onMounted  } from "vue"
-
-import useShader from "../composables/useShader";
-import scene from "../composables/canvas";
-import { useImage } from "../composables/plane";
+import { useShader, scene, useImage } from "moonbow";
 
 const imageRef = ref(null)
 
