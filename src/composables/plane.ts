@@ -16,29 +16,34 @@ export function addPlane(scene: THREE.Scene, {width, height, material = defaultM
   return plane
 }
 
-export function usePlane(scene: THREE.Scene, element: HTMLImageElement, material: Material) {
-  const { width, height } = element.getBoundingClientRect()
-  const plane = addPlane(scene, {width, height, material})
-  element.classList.add("proxy")
-
-  function attach(geo: THREE.Mesh<THREE.PlaneGeometry, Material>) {
-    const el = element.getBoundingClientRect()
-    const worldReset = {
-      top:  window.innerHeight / 2,
-      left: - window.innerWidth / 2
-    }
-  
-    const elementPosition = {
-      x: el.x + (el.width / 2),
-      y: -(el.y + (el.height / 2))
-    }
-
-    geo.position.x = worldReset.left + elementPosition.x
-    geo.position.y = worldReset.top + elementPosition.y
+function attach(geo: THREE.Mesh<THREE.PlaneGeometry, Material>, element: HTMLElement) {
+  const el = element.getBoundingClientRect()
+  const worldReset = {
+    top:  window.innerHeight / 2,
+    left: - window.innerWidth / 2
   }
 
-  attach(plane)
-  return { plane, attach }
+  const elementPosition = {
+    x: el.x + (el.width / 2),
+    y: -(el.y + (el.height / 2))
+  }
+
+  geo.position.x = worldReset.left + elementPosition.x
+  geo.position.y = worldReset.top + elementPosition.y
+}
+
+export function usePlane(scene: THREE.Scene | null, element: HTMLImageElement | null, material: Material | null) {
+  const condition = scene === null || element === null || material === null
+  if(condition) {
+    return {plane: null, attach: null}
+  } else {
+    const { width, height } = element.getBoundingClientRect()
+    const plane = addPlane(scene, {width, height, material})
+    element.classList.add("proxy")
+    attach(plane, element)
+    return { plane, attach: (p = plane) => attach(p, element) }
+  }
+
 }
 
 export function imageTexture(element: HTMLImageElement) {
@@ -51,7 +56,6 @@ export function imageTexture(element: HTMLImageElement) {
 export function useImage(scene: THREE.Scene | null, element: HTMLImageElement | null, material: Material | null) {
   //material && (material = new THREE.MeshBasicMaterial({map: imageTexture(element)}))
   const condition = scene && element && material ? true : false
-  condition ? console.log("lol", condition) : console.log("nope", condition)
   return condition ? usePlane(scene, element, material) : {plane: null, attach: null}
 }
 

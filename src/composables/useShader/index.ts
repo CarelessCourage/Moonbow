@@ -56,7 +56,7 @@ function useShader(element: HTMLImageElement | null) {
     material.uniforms.uScreenSize.value = [width, height]
 
     material.uniforms.uTexture.value = tex
-    material.uniforms.uTexture.needsUpdate = true
+    //material.uniforms.uTexture.needsUpdate = true
   })
 
   //update the time and velocity
