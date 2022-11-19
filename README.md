@@ -17,7 +17,8 @@ npm install moonbow
 
 ```vue
 <script setup lang="ts">
-import Moon from "moonbow";
+import { Moon } from "moonbow"
+import "moonbow/dist/style.css"
 const imageURL = "https://images.unsplash.com/photo-1642059893618"
 </script>
 
