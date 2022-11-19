@@ -1,4 +1,4 @@
-# Moonbow :new_moon_with_face:
+# Moonbow :new_moon_with_face::rainbow:
 Vue component for adding GLSL to images :fire::fire::fire:
 
 ## Installation
