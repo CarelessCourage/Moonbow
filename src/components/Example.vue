@@ -32,18 +32,14 @@ let uniforms = {
 }
 
 const velocity = useScroll()
-function uniformVelocity(m: THREE.ShaderMaterial) {
-  watch(velocity, (velocity) => {
-    m.uniforms.uVelocity.value = velocity
-  })
-}
-
 const uniformControls = {
   vertexShader,
   fragmentShader,
   uniforms,
   uniformAction: (material: THREE.ShaderMaterial) => {
-    uniformVelocity(material)
+    watch(velocity, (velocity) => {
+      material.uniforms.uVelocity.value = velocity
+    })
   }
 }
 </script>
