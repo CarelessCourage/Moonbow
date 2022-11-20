@@ -1,7 +1,6 @@
 uniform float uTime;
 uniform float uVelocity;
 uniform sampler2D uTexture;
-uniform vec2 uTextureCover;
 uniform vec2 uTextureSize;
 uniform vec2 uScreenSize;
 

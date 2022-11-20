@@ -63,6 +63,7 @@ onMounted(() => {
 
 - :kissing_cat: ***Simple*** - Just a simple image component needed. Nothing more
 - :muscle: ***Flexible*** - Flexible primitives underneath that let you build your own logic
+- :telescope: ***Typesafe*** Written fully in typescript 
 - :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content so canvas image flows with the HTML elements
 - :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts so you dont lose accessibility controls like other approaches would
 
