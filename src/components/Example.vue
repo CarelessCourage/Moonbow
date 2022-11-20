@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import Moon from "./Moon.vue";
+import { Moon, useScroll } from "../index"
+useScroll()
 
 const images = [
   "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1566&q=80",
@@ -24,6 +25,7 @@ const images = [
 </script>
 
 <template>
+  <h1 class="logo">moonbow</h1>
   <div class="banner">
     <Moon :src="images[0]" :width="1900" :height="1200" :speed="1.5"/>
   </div>
@@ -44,6 +46,17 @@ const images = [
 
 <style lang="scss">
 @import "../css";
+
+.logo {
+  font-size: 9rem;
+  position: fixed;
+  z-index: 99;
+  color: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+}
 
 .title {
   margin: 100px 0px;
@@ -68,11 +81,9 @@ const images = [
 
 .image-container {
   cursor: pointer;
-  //border-radius: 12px;
   overflow: hidden;
   transition: .2s;
   img {
-    //border: solid 3px var(--shade);
     width: 100%;
     aspect-ratio: 1 / 1;
   }
@@ -99,7 +110,12 @@ const images = [
   transition: .2s;
 }
 
-canvas {
+body > *:not(canvas[data-engine]) {
+  position: relative;
+  z-index: 1;
+}
+
+canvas[data-engine] {
   position: fixed;
   top: 0px; left: 0px;
   z-index: 0;

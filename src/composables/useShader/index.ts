@@ -1,5 +1,5 @@
-import * as THREE from 'three';
 import { ref } from 'vue'
+import * as THREE from 'three';
 
 import vertexShader from './vertex.glsl';
 import fragmentShader from './fragment.glsl';
