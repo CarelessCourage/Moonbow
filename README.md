@@ -55,6 +55,45 @@ import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
 </template>
 ```
 
+Adding custom uniforms and changing uniforms dynamically from JavaScript
+```vue
+
+<script setup lang="ts">
+import { Moon } from "moonbow"
+import "moonbow/dist/style.css"
+
+import vertexShader from '../shaders/scrollDeform/vertex.glsl'
+import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
+
+let uniforms = {
+  uVelocity: { value: 0 },
+}
+
+const velocity = useScroll()
+function uniformVelocity(m: THREE.ShaderMaterial) {
+  watch(velocity, (velocity) => {
+    m.uniforms.uVelocity.value = velocity
+  })
+}
+
+const uniformControls = {
+  vertexShader,
+  fragmentShader,
+  uniforms,
+  uniformAction: (material: THREE.ShaderMaterial) => {
+    uniformVelocity(material)
+  }
+}
+</script>
+
+<template>
+  <Moon
+    src="https://images.unsplash.com/photo-1642059893618"
+    v-bind="uniformControls"
+  />
+</template>
+```
+
 ## :dna: Primitives
 ```vue
 <script setup>

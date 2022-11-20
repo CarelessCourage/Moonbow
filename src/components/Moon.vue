@@ -19,7 +19,7 @@ interface Props {
   vertexShader?: string;
   fragmentShader?: string;
   uniforms?: any;
-  uniformAction?: (material: THREE.ShaderMaterial) => void;
+  uniformAction?: null | ((material: THREE.ShaderMaterial) => void);
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   fragmentShader,
   vertexShader,
   uniforms: {},
-  uniformAction: () => {}
+  uniformAction: null
 })
 
 onMounted(() => {
@@ -54,7 +54,7 @@ onMounted(() => {
     src: props.src,
   })
 
-  props.uniformAction(material)
+  props.uniformAction && props.uniformAction(material)
 })
 </script>
 

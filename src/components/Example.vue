@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { watch } from 'vue'
 import { Moon, useScroll } from '../index'
 
 import vertexShader from '../shaders/scrollDeform/vertex.glsl'
@@ -25,8 +26,25 @@ const images = [
   "https://images.unsplash.com/photo-1634674740765-d91530f3eded?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
 ]
 
+
 let uniforms = {
   uVelocity: { value: 0 },
+}
+
+const velocity = useScroll()
+function uniformVelocity(m: THREE.ShaderMaterial) {
+  watch(velocity, (velocity) => {
+    m.uniforms.uVelocity.value = velocity
+  })
+}
+
+const uniformControls = {
+  vertexShader,
+  fragmentShader,
+  uniforms,
+  uniformAction: (material: THREE.ShaderMaterial) => {
+    uniformVelocity(material)
+  }
 }
 </script>
 
@@ -35,24 +53,17 @@ let uniforms = {
   <div class="banner">
     <Moon
       :src="images[0]"
-      width="1900"
-      height="1200"
-      alt="1.5"
-      :vertexShader="vertexShader"
-      :fragmentShader="fragmentShader"
-      :uniforms="uniforms"
-      :uniformAction="(material) => {
-        useScroll((velocity) => {
-          material.uniforms.uVelocity.value = velocity
-        })
-      }"
+      v-bind="uniformControls"
     />
   </div>
   <div class="page">
     <h1 class="title">Samsons World</h1>
     <div class="images">
       <div v-for="image in images" class="image-container" :key="image">
-        <Moon :src="image" />
+        <Moon 
+          :src="image"
+          v-bind="uniformControls"
+        />
         <div class="meta">
           <h3>Title</h3>
           <p>date</p>

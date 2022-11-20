@@ -26,8 +26,9 @@ var checkScrollSpeed = () => {
 }
 
 const getVelocity = checkScrollSpeed()
+const velocity = ref(0)
 
-export const useScroll = (callback: (velocity: number) => void) => {
+export function useScroll() {
   const scroll = ref(0)
   const speed  = ref(0)
 
@@ -41,7 +42,8 @@ export const useScroll = (callback: (velocity: number) => void) => {
     const change = 0.1
     if(speed.value > 0) speed.value -= change
     if(speed.value < 0) speed.value += change
-    const velocity = (100 * speed.value)
-    callback(velocity)
+    velocity.value = (100 * speed.value)
    })
+
+   return velocity
 }
