@@ -4,8 +4,6 @@ import { Moon, useScroll } from '../index'
 import vertexShader from '../shaders/scrollDeform/vertex.glsl'
 import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
 
-//useScroll()
-
 const images = [
   "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1566&q=80",
   "https://images.unsplash.com/photo-1634855105161-2f328c473638?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
@@ -26,18 +24,28 @@ const images = [
   "https://images.unsplash.com/photo-1646858383294-5297917fd4cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
   "https://images.unsplash.com/photo-1634674740765-d91530f3eded?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
 ]
+
+let uniforms = {
+  uVelocity: { value: 0 },
+}
 </script>
 
 <template>
   <h1 class="logo">moonbow</h1>
   <div class="banner">
-    <Moon 
-      :src="images[0]" 
+    <Moon
+      :src="images[0]"
       width="1900"
       height="1200"
       alt="1.5"
       :vertexShader="vertexShader"
       :fragmentShader="fragmentShader"
+      :uniforms="uniforms"
+      :uniformAction="(material) => {
+        useScroll((velocity) => {
+          material.uniforms.uVelocity.value = velocity
+        })
+      }"
     />
   </div>
   <div class="page">

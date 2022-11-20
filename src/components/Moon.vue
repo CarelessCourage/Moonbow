@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted  } from "vue"
-import { onFrame } from "../composables/utils"
+import { syncToDOM } from "../composables/syncToDOM"
 
 import useShader from "../composables/useShader";
 import scene from "../composables/canvas";
@@ -18,7 +18,8 @@ interface Props {
   alt?: string;
   vertexShader?: string;
   fragmentShader?: string;
-  uniforms?: any
+  uniforms?: any;
+  uniformAction?: (material: THREE.ShaderMaterial) => void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -28,7 +29,8 @@ const props = withDefaults(defineProps<Props>(), {
   alt: undefined,
   fragmentShader,
   vertexShader,
-  uniforms: {}
+  uniforms: {},
+  uniformAction: () => {}
 })
 
 onMounted(() => {
@@ -39,24 +41,20 @@ onMounted(() => {
   }
 
   const material = useShader(imageRef.value, shader)
-  const { plane, attach } = useImage(scene.value, imageRef.value, material)
-
-  let refresh = true
-
-  function inView(entries: IntersectionObserverEntry[]) {
-    entries.forEach(entry => {
-      const src = entry.target.getAttribute('src')
-      if(src === props.src) refresh = entry.isIntersecting
-    })
-  }
-
-  const observer = new IntersectionObserver(inView, {
-    root: document.querySelector('#smooth-content'),
-    rootMargin: '600px'
+  if(!material) return
+  
+  const moonimg = useImage({
+    scene: scene.value, 
+    element: imageRef.value, 
+    material
   })
 
-  imageRef.value && observer.observe(imageRef.value)
-  onFrame(() => refresh && attach && attach(plane))
+  syncToDOM({
+    moonimg,
+    src: props.src,
+  })
+
+  props.uniformAction(material)
 })
 </script>
 

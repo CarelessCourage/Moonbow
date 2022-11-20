@@ -27,7 +27,7 @@ var checkScrollSpeed = () => {
 
 const getVelocity = checkScrollSpeed()
 
-export const useScroll = (material: THREE.ShaderMaterialParameters) => {
+export const useScroll = (callback: (velocity: number) => void) => {
   const scroll = ref(0)
   const speed  = ref(0)
 
@@ -41,9 +41,7 @@ export const useScroll = (material: THREE.ShaderMaterialParameters) => {
     const change = 0.1
     if(speed.value > 0) speed.value -= change
     if(speed.value < 0) speed.value += change
-    //material.uniforms.uTime.value = elapsedTime
-    //velocity.value = (100 * speed.value)
+    const velocity = (100 * speed.value)
+    callback(velocity)
    })
-
-  return { scroll, speed }
 }
