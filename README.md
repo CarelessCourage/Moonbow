@@ -98,14 +98,28 @@ const uniformControls = {
 ```vue
 <script setup>
 import { ref, onMounted  } from "vue"
-import { useShader, scene, useImage } from "moonbow";
+import { useShader, scene, useImage, syncToDOM } from "moonbow";
 
 const imageRef = ref(null)
 
 onMounted(() => {
-  const shader = useShader(imageRef.value)
-  const { plane, attach } = useImage(scene.value, imageRef.value, shader)
-  attach(plane)
+  const shader = {
+    vertexShader: props.vertexShader,
+    fragmentShader: props.fragmentShader,
+    uniforms: props.uniforms
+  }
+
+  const material = useShader(imageRef.value, shader)
+  const proxyimg = useImage({
+    scene: scene.value, 
+    element: imageRef.value, 
+    material
+  })
+
+  syncToDOM({
+    proxyimg,
+    src: props.src,
+  })
 })
 </script>
 

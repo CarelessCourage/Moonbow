@@ -41,19 +41,18 @@ onMounted(() => {
   }
 
   const material = useShader(imageRef.value, shader)
-  if(!material) return
-  
-  const moonimg = useImage({
+  const proxyimg = useImage({
     scene: scene.value, 
     element: imageRef.value, 
     material
   })
 
   syncToDOM({
-    moonimg,
+    proxyimg,
     src: props.src,
   })
 
+  if(!material) return
   props.uniformAction && props.uniformAction(material)
 })
 </script>

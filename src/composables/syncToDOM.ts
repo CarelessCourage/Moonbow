@@ -3,11 +3,11 @@ import type { planeInterface } from './plane'
 
 interface propInterface {
   src: string | undefined;
-  moonimg: planeInterface
+  proxyimg: planeInterface
 }
 
-export function syncToDOM({moonimg, src}: propInterface) {
-  const { plane, attach, element } = moonimg
+export function syncToDOM({proxyimg, src}: propInterface) {
+  const { plane, attach, element } = proxyimg
   let refresh = true
 
   function inView(entries: IntersectionObserverEntry[]) {
