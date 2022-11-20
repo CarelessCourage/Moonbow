@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { Moon, useScroll } from "../index"
-useScroll()
+import { Moon, useScroll } from '../index'
+
+import vertexShader from '../shaders/scrollDeform/vertex.glsl'
+import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
+
+//useScroll()
 
 const images = [
   "https://images.unsplash.com/photo-1642059893618-22daf30e92a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1566&q=80",
@@ -27,7 +31,14 @@ const images = [
 <template>
   <h1 class="logo">moonbow</h1>
   <div class="banner">
-    <Moon :src="images[0]" :width="1900" :height="1200" :speed="1.5"/>
+    <Moon 
+      :src="images[0]" 
+      width="1900"
+      height="1200"
+      alt="1.5"
+      :vertexShader="vertexShader"
+      :fragmentShader="fragmentShader"
+    />
   </div>
   <div class="page">
     <h1 class="title">Samsons World</h1>
@@ -55,7 +66,7 @@ const images = [
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100vw;
+  width: min-content;
 }
 
 .title {

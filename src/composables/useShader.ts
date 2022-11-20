@@ -7,11 +7,8 @@ import fragmentShader from '../shaders/default/fragment.glsl';
 import { windowDimensions } from "./utils";
 import { onFrame } from "./utils";
 
-export const velocity = ref(0)
-
 let uniforms = {
   uTime: { value: 0 },
-  uVelocity: { value: 0 },
   uTexture: { value: null },
   uTextureCover: { value: [0, 1] },
   uTextureSize: { value: [0, 1] },
@@ -29,13 +26,20 @@ function getShader(params: THREE.ShaderMaterialParameters) {
   return new THREE.ShaderMaterial(params)
 }
 
+function customShader(params: THREE.ShaderMaterialParameters) {
+  return getShader({...defaultParams, ...params, uniforms: {
+    ...defaultParams.uniforms,
+    ...params.uniforms
+  }})
+}
+
 const defaultShader = getShader({...defaultParams})
 
 const clock = new THREE.Clock()
 
 function useShader(element: HTMLImageElement | null, shader?: THREE.ShaderMaterialParameters) {
   const material =  shader 
-    ? getShader({...defaultParams, ...shader}) 
+    ? customShader(shader).clone()
     : defaultShader.clone()
 
   const { width, height } = windowDimensions()
@@ -51,7 +55,6 @@ function useShader(element: HTMLImageElement | null, shader?: THREE.ShaderMateri
   onFrame(() => {
     const elapsedTime = clock.getElapsedTime()
     material.uniforms.uTime.value = elapsedTime
-    material.uniforms.uVelocity.value = velocity.value
   })
 
   return material  

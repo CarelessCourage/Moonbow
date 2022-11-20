@@ -23,7 +23,7 @@ export default defineConfig({
 ```
 
 ## :crystal_ball: Usage
-
+Simple example using default GLSL
 ```vue
 <script setup lang="ts">
 import { Moon } from "moonbow"
@@ -33,6 +33,25 @@ const imageURL = "https://images.unsplash.com/photo-1642059893618"
 
 <template>
   <Moon :src="imageURL"/>
+</template>
+```
+
+Adding your own custom GLSL
+```vue
+<script setup lang="ts">
+import { Moon } from "moonbow"
+import "moonbow/dist/style.css"
+
+import vertexShader from '../shaders/scrollDeform/vertex.glsl'
+import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
+</script>
+
+<template>
+  <Moon 
+    src="https://images.unsplash.com/photo-1642059893618" 
+    :vertexShader="vertexShader"
+    :fragmentShader="fragmentShader"
+  />
 </template>
 ```
 
@@ -63,7 +82,7 @@ onMounted(() => {
 
 - :kissing_cat: ***Simple*** - Just a simple image component needed. Nothing more
 - :muscle: ***Flexible*** - Flexible primitives underneath that let you build your own logic
-- :telescope: ***Typesafe*** Written fully in typescript 
+- :telescope: ***Typesafe*** - Written fully in typescript 
 - :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content so canvas image flows with the HTML elements
 - :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts so you dont lose accessibility controls like other approaches would
 

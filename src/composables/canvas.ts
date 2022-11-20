@@ -10,8 +10,6 @@ import { onResize } from './utils.js'
 import { setWindow } from './utils.js'
 import { onFrame } from './utils.js'
 
-import { velocity } from './useShader'
-
 let scene = shallowRef<THREE.Scene | null>(null)
 scene.value = initCanvas()
 
@@ -30,7 +28,6 @@ function usePostProcessing(
   const shaderPass = new ShaderPass({
     uniforms: {
       uTime: { value: 0 },
-      uVelocity: { value: 0 },
       tDiffuse: { value: null },
       uResolution: { value: new THREE.Vector2() }
     },
@@ -43,7 +40,6 @@ function usePostProcessing(
   onFrame(() => {
     const elapsedTime = clock.getElapsedTime()
     shaderPass.uniforms.uTime.value = elapsedTime
-    shaderPass.uniforms.uVelocity.value = velocity.value
   })
   composer.addPass(shaderPass)
   return composer
