@@ -1,4 +1,4 @@
-![chrome-capture-2022-10-20 (1)](https://user-images.githubusercontent.com/12764398/202879736-57d00d6e-7e60-430d-a351-7dcad5cf9fb9.gif)
+![chrome-capture-2022-10-20 (2)](https://user-images.githubusercontent.com/12764398/202923488-2abefa21-5d4d-4426-b457-7b8ee446df6e.gif)
 
 # Moonbow :new_moon_with_face:+:rainbow:
 Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire:
