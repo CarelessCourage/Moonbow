@@ -25,7 +25,7 @@ export default defineConfig({
 ## :crystal_ball: Usage
 Simple example using default GLSL
 ```vue
-<script setup lang="ts">
+<script setup>
 import { Moon } from "moonbow"
 import "moonbow/dist/style.css"
 const imageURL = "https://images.unsplash.com/photo-1642059893618"
@@ -38,7 +38,7 @@ const imageURL = "https://images.unsplash.com/photo-1642059893618"
 
 Adding your own custom GLSL
 ```vue
-<script setup lang="ts">
+<script setup>
 import { Moon } from "moonbow"
 import "moonbow/dist/style.css"
 
@@ -58,7 +58,7 @@ import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
 Adding custom uniforms and changing uniforms dynamically from JavaScript
 ```vue
 
-<script setup lang="ts">
+<script setup>
 import { Moon } from "moonbow"
 import "moonbow/dist/style.css"
 
@@ -74,7 +74,7 @@ const uniformControls = {
   vertexShader,
   fragmentShader,
   uniforms,
-  uniformAction: (material: THREE.ShaderMaterial) => {
+  uniformAction: (material) => {
     watch(velocity, (velocity) => {
       material.uniforms.uVelocity.value = velocity
     })
