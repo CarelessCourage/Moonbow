@@ -57,7 +57,6 @@ import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
 
 Adding custom uniforms and changing uniforms dynamically from JavaScript
 ```vue
-
 <script setup>
 import { watch } from 'vue'
 import { Moon, useScroll } from "moonbow"
@@ -127,17 +126,70 @@ onMounted(() => {
 </template>
 ```
 
+Postprocessing function to let you apply GLSL to all elements uniformly.
+```vue
+<script setup>
+import { postProcessing } from '../composables/canvas'
+
+import vertexShader from '../shaders/bottomScale/vertex.glsl';
+import fragmentShader from '../shaders/bottomScale/fragment.glsl';
+
+const postUniforms = {
+  uExample: { value: 0 },
+}
+
+postProcessing({
+  uniforms: defaultUniforms,
+  vertexShader: vertexShader2,
+  fragmentShader: fragmentShader2,
+})
+
+
+postProcessing(defaultShader, (m) => {
+  watch(velocity, (velocity) => {
+    m.uniforms.uVelocity.value = velocity
+  })
+})
+</script>
+```
+
+Postprocessing function with uniformAction example
+```vue
+<script setup>
+import { postProcessing } from '../composables/canvas'
+
+import vertexShader from '../shaders/bottomScale/vertex.glsl';
+import fragmentShader from '../shaders/bottomScale/fragment.glsl';
+
+const postUniforms = {
+  uExample: { value: 0 },
+}
+
+const shader = {
+  uniforms: postUniforms,
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
+}
+
+postProcessing(shader, (m) => {
+  watch(velocity, (velocity) => {
+    m.uniforms.uVelocity.value = velocity
+  })
+})
+</script>
+```
+
 ## :alembic: How it works
-> Moonbow does this by leveraging [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image which sticks to the size and position of the HTML img element. Then it checks which images are inside the viewport using an intersection observer and for each image in view will update size and position on each animation frame to align with its hidden HTML img element. 
+> Moonbow leverages [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image and sticks it to the size and position of the proxy HTML img element. It re-attatches this plane to the img element on every animation frame to keep it consistent with the layout. But it saves on performance by only attaching the planes that are inside the viewport. It does this by using an intersection observer to check for images in view.
 
 - :kissing_cat: ***Simple*** - Just a simple image component needed. Nothing more
 - :muscle: ***Flexible*** - Flexible primitives underneath that let you build your own logic
 - :telescope: ***Typesafe*** - Written fully in typescript 
-- :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content so canvas image flows with the HTML elements
-- :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts so you dont lose accessibility controls like other approaches would
+- :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content letting canvas images flows with the HTML elements
+- :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts you dont lose accessibility controls like other approaches would
 
 #### :test_tube: Benefits of this approach
-This lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Since images can be both in the HTML - taking up space and flowing with your layout as expected while still taking advantage of GLSL in the 3D proxy. This is also great for accessibility since it means we can accomplish complex image manipulation without sacrificing on the browser inbuilt accessibility tools.
+This apprach lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Images get created in webGL with a HTML proxy element in the DOM taking up space and flowing with your layout. This is also great for accessibility since it means we can accomplish complex image manipulation without sacrificing on the browser inbuilt accessibility tools.
 
 ## :scroll: Resources
 Learn how to write GLSL: [Book of Shaders](https://thebookofshaders.com/)
