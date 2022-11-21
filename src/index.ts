@@ -6,6 +6,7 @@ import { useScroll } from "./composables/useScroll"
 import useShader from "./composables/useShader"
 import scene from "./composables/canvas"
 import { useImage } from "./composables/plane"
+import { syncToDOM } from "./composables/syncToDOM"
 
 export {
   Moon,
@@ -14,5 +15,6 @@ export {
   useShader,
   useScroll,
   scene,
-  useImage
+  useImage,
+  syncToDOM
 }

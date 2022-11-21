@@ -59,7 +59,8 @@ Adding custom uniforms and changing uniforms dynamically from JavaScript
 ```vue
 
 <script setup>
-import { Moon } from "moonbow"
+import { watch } from 'vue'
+import { Moon, useScroll } from "moonbow"
 import "moonbow/dist/style.css"
 
 import vertexShader from '../shaders/scrollDeform/vertex.glsl'
