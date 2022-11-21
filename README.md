@@ -126,7 +126,7 @@ onMounted(() => {
 </template>
 ```
 
-Postprocessing function to let you apply GLSL to all elements uniformly.
+Postprocessing function to let you apply GLSL to all elements uniformly. Example with plain GLSL without dynamic uniforms
 ```vue
 <script setup>
 import { postProcessing } from '../composables/canvas'
@@ -143,17 +143,10 @@ postProcessing({
   vertexShader: vertexShader2,
   fragmentShader: fragmentShader2,
 })
-
-
-postProcessing(defaultShader, (m) => {
-  watch(velocity, (velocity) => {
-    m.uniforms.uVelocity.value = velocity
-  })
-})
 </script>
 ```
 
-Postprocessing function with uniformAction example
+Postprocessing function with uniformAction/dynamic uniforms example.
 ```vue
 <script setup>
 import { postProcessing } from '../composables/canvas'
