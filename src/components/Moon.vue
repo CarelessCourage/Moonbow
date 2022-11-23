@@ -9,9 +9,9 @@ import { useImage } from "../composables/plane";
 import vertexShader from '../shaders/default/vertex.glsl';
 import fragmentShader from '../shaders/default/fragment.glsl';
 
-const imageRef = ref(null)
+const imageRef = ref(null);
 
-interface Props {
+const props = withDefaults(defineProps<{
   src?: string;
   width?: number | string;
   height?: number | string;
@@ -19,10 +19,8 @@ interface Props {
   vertexShader?: string;
   fragmentShader?: string;
   uniforms?: any;
-  uniformAction?: null | ((material: THREE.ShaderMaterial) => void);
-}
-
-const props = withDefaults(defineProps<Props>(), {
+  uniformAction?: (material: THREE.ShaderMaterial) => void;
+}>(), {
   src: undefined,
   width: 300,
   height: 300,
@@ -30,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   fragmentShader,
   vertexShader,
   uniforms: {},
-  uniformAction: null
+  uniformAction: () => {}
 })
 
 onMounted(() => {
