@@ -4,11 +4,19 @@ import { Moon, useScroll } from '../index'
 
 import vertexShader from '../shaders/scrollDeform/vertex.glsl'
 import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
-import images from '../assets/images'
-import { postProcessing } from '../composables/canvas'
+import imagesss from '../assets/images'
+import { postProcessing } from '../composables/scene'
 
-import vertexShader2 from '../shaders/bottomScale/vertex.glsl';
-import fragmentShader2 from '../shaders/bottomScale/fragment.glsl';
+import vertexShader2 from '../shaders/bottomScale/vertex.glsl'
+import fragmentShader2 from '../shaders/bottomScale/fragment.glsl'
+
+export interface ExampleProps {
+  images?: string[];
+}
+
+withDefaults(defineProps<ExampleProps>(), {
+  images: imagesss,
+})
 
 const postUniforms = {
   uVelocity: { value: 0 },

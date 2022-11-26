@@ -1,13 +1,13 @@
-import { onFrame } from './utils'
-import type { planeInterface } from './plane'
+import { onFrame } from '../utils'
+import type { planeInterface } from './usePlane'
 
 interface propInterface {
   src: string | undefined;
-  proxyimg: planeInterface
+  proxy: planeInterface
 }
 
-export function syncToDOM({proxyimg, src}: propInterface) {
-  const { plane, attach, element } = proxyimg
+export function proxySync({proxy, src}: propInterface) {
+  const { plane, attach, element } = proxy
   let refresh = true
 
   function inView(entries: IntersectionObserverEntry[]) {

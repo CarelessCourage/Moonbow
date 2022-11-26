@@ -3,8 +3,8 @@ import * as THREE from 'three';
 import type { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 import { getCamera } from './camera.js'
-import { onResize } from './utils.js'
-import { setWindow } from './utils.js'
+import { onResize } from './utils'
+import { setWindow } from './utils'
 import { getComposer, defaultShader } from './postprocessing.js'
 
 type actionType = (material: ShaderPass) => void

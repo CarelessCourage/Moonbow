@@ -6,7 +6,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import vertexShader from '../shaders/bottomScale/vertex.glsl';
 import fragmentShader from '../shaders/bottomScale/fragment.glsl';
 
-import { onFrame, onResize, setWindow } from './utils.js'
+import { onFrame, onResize, setWindow } from './utils'
 
 const defaultUniforms = {
   uTime: { value: 0 },

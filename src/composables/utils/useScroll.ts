@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { onScroll, onFrame } from './utils'
+import { onScroll, onFrame } from './'
 
 var checkScrollSpeed = () => {
   var lastPos: number | null = null

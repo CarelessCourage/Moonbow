@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted  } from "vue"
-import { syncToDOM } from "../composables/syncToDOM"
+import { proxySync } from "../composables/primitives/proxySync"
 
-import useShader from "../composables/useShader";
-import scene from "../composables/canvas";
-import { useImage } from "../composables/plane";
+import useShader from "../composables/primitives/useShader";
+import scene from "../composables/scene";
+import { useImage } from "../composables/primitives/usePlane";
 
 import vertexShader from '../shaders/default/vertex.glsl';
 import fragmentShader from '../shaders/default/fragment.glsl';
@@ -39,16 +39,13 @@ onMounted(() => {
   }
 
   const material = useShader(imageRef.value, shader)
-  const proxyimg = useImage({
+  const proxy = useImage({
     scene: scene.value, 
     element: imageRef.value, 
     material
   })
 
-  syncToDOM({
-    proxyimg,
-    src: props.src,
-  })
+  proxySync({ proxy, src: props.src })
 
   if(!material) return
   props.uniformAction && props.uniformAction(material)

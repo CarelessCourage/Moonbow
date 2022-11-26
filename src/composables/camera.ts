@@ -1,5 +1,5 @@
-import * as THREE from 'three';
-import { onResize } from './utils.js'
+import * as THREE from 'three'
+import { onResize } from './utils'
 
 const cameraDimensions = () => ({
   caps: window.innerHeight / 2,

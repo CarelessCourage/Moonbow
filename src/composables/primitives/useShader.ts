@@ -1,11 +1,10 @@
-import { ref } from 'vue'
-import * as THREE from 'three';
+import * as THREE from 'three'
 
-import vertexShader from '../shaders/default/vertex.glsl';
-import fragmentShader from '../shaders/default/fragment.glsl';
+import vertexShader from '@/shaders/default/vertex.glsl'
+import fragmentShader from '@/shaders/default/fragment.glsl'
 
-import { windowDimensions } from "./utils";
-import { onFrame } from "./utils";
+import { windowDimensions } from "../utils"
+import { onFrame } from "../utils"
 
 let uniforms = {
   uTime: { value: 0 },

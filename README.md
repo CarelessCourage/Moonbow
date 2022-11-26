@@ -94,7 +94,7 @@ const uniformControls = {
 ```vue
 <script setup>
 import { ref, onMounted  } from "vue"
-import { useShader, scene, useImage, syncToDOM } from "moonbow";
+import { useShader, scene, useImage, proxySync } from "moonbow";
 
 const imageRef = ref(null)
 
@@ -106,14 +106,14 @@ onMounted(() => {
   }
 
   const material = useShader(imageRef.value, shader)
-  const proxyimg = useImage({
+  const proxy = useImage({
     scene: scene.value, 
     element: imageRef.value, 
     material
   })
 
-  syncToDOM({
-    proxyimg,
+  proxySync({
+    proxy,
     src: props.src,
   })
 })
