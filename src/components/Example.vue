@@ -38,24 +38,26 @@ const uniformControls = {
 </script>
 
 <template>
-  <h1 class="logo">moonbow</h1>
-  <div class="banner">
-    <Moon
-      :src="images[0]"
-      v-bind="uniformControls"
-    />
-  </div>
-  <div class="page">
-    <div class="images">
-      <div v-for="image in images" class="image-container" :key="image">
-        <Moon 
-          :src="image"
-          v-bind="uniformControls"
-        />
-        <div class="meta">
-          <h3>Title</h3>
-          <p>date</p>
-          <p>Some description</p>
+  <div>
+    <h1 class="logo">moonbow</h1>
+    <div class="banner">
+      <Moon
+        :src="images[0]"
+        v-bind="uniformControls"
+      />
+    </div>
+    <div class="page">
+      <div class="images">
+        <div v-for="image in images" class="image-container" :key="image">
+          <Moon 
+            :src="image"
+            v-bind="uniformControls"
+          />
+          <div class="meta">
+            <h3>Title</h3>
+            <p>date</p>
+            <p>Some description</p>
+          </div>
         </div>
       </div>
     </div>

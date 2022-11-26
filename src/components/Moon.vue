@@ -12,7 +12,7 @@ import fragmentShader from '../shaders/default/fragment.glsl';
 const imageRef = ref(null);
 
 const props = withDefaults(defineProps<{
-  src?: string;
+  src: string;
   width?: number | string;
   height?: number | string;
   alt?: string;

@@ -1,6 +1,6 @@
 {
   "name": "moonbow",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "Vue component for adding GLSL to images",
   "author": "Samuel M. Bednarz<https://github.com/CarelessCourage>",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "dist"
   ],
   "main": "./dist/moonbow.umd.cjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "module": "./dist/moonbow.js",
   "exports": {
     ".": {
@@ -25,10 +25,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p build-only && vue-tsc --emitDeclarationOnly && mv dist/src dist/types",
+    "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --emitDeclarationOnly"
   },
   "dependencies": {
     "sass": "^1.56.1",
