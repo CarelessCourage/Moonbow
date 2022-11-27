@@ -18,14 +18,12 @@ withDefaults(defineProps<ExampleProps>(), {
   images: imagesss,
 })
 
-const postUniforms = {
-  uVelocity: { value: 0 },
-}
-
 postProcessing({
-  uniforms: postUniforms,
   vertexShader: vertexShader2,
   fragmentShader: fragmentShader2,
+  uniforms: {
+    uVelocity: { value: 0 },
+  }
 })
 
 let uniforms = {
