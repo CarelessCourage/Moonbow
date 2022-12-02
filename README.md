@@ -4,6 +4,21 @@
 Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire:
 > :warning: This package is in very early alpha and is therefore most suited for experimentation. Expect issues
 
+## :alembic: How it works
+> Moonbow leverages [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image and sticks it to the size and position of the proxy HTML img element. It re-attatches this plane to the img element on every animation frame to keep it consistent with the layout. But it saves on performance by only attaching the planes that are inside the viewport. It does this by using an intersection observer to check for images in view.
+
+- :kissing_cat: ***Simple*** - Just a simple image component needed. Nothing more
+- :muscle: ***Flexible*** - Flexible primitives underneath that let you build your own logic
+- :telescope: ***Typesafe*** - Written fully in typescript 
+- :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content letting canvas images flows with the HTML elements
+- :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts you dont lose accessibility controls like other approaches would
+
+#### :test_tube: Benefits of this approach
+This apprach lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Images get created in webGL with a HTML proxy element in the DOM taking up space and flowing with your layout. This is also great for accessibility since it means we can accomplish complex image manipulation without sacrificing on the browser inbuilt accessibility tools.
+
+## :scroll: Resources
+Learn how to write GLSL: [Book of Shaders](https://thebookofshaders.com/)
+
 ## :package: Installation
 ```bash
 npm install moonbow
@@ -171,18 +186,3 @@ postProcessing(shader, (m) => {
 })
 </script>
 ```
-
-## :alembic: How it works
-> Moonbow leverages [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image and sticks it to the size and position of the proxy HTML img element. It re-attatches this plane to the img element on every animation frame to keep it consistent with the layout. But it saves on performance by only attaching the planes that are inside the viewport. It does this by using an intersection observer to check for images in view.
-
-- :kissing_cat: ***Simple*** - Just a simple image component needed. Nothing more
-- :muscle: ***Flexible*** - Flexible primitives underneath that let you build your own logic
-- :telescope: ***Typesafe*** - Written fully in typescript 
-- :hammer_and_wrench: ***Maintainable*** - HTML stays descriptive of content letting canvas images flows with the HTML elements
-- :man_in_manual_wheelchair: ***Accessible*** - Since canvas elements have their HTML counterparts you dont lose accessibility controls like other approaches would
-
-#### :test_tube: Benefits of this approach
-This apprach lets you take advantage of GLSL for your images while keeping the DOM descriptive of your content. Images get created in webGL with a HTML proxy element in the DOM taking up space and flowing with your layout. This is also great for accessibility since it means we can accomplish complex image manipulation without sacrificing on the browser inbuilt accessibility tools.
-
-## :scroll: Resources
-Learn how to write GLSL: [Book of Shaders](https://thebookofshaders.com/)
