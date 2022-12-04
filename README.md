@@ -148,9 +148,17 @@ defaultGLSL({
 ## :dna: Primitives
 Moonbow exposes the underlying primitives developed to make the Moon image component. You can easily use these primitives to build your own solution. Below is the entire code for the Moon component showcasing the way it uses the primities. 
 ```vue
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted  } from "vue"
 import { useShader, scene, useImage, syncProxyHTML } from "moonbow";
+
+const props = defineProps({
+  src: string;
+  vertexShader?: string;
+  fragmentShader?: string;
+  uniforms?: any;
+  uniformAction?: (material: ShaderType) => void;
+})
 
 const imageRef = ref(null)
 
@@ -218,12 +226,13 @@ const shader = {
   uniforms: postUniforms,
   vertexShader: vertexShader,
   fragmentShader: fragmentShader,
+  uniformAction: (m) => {
+    watch(velocity, (velocity) => {
+      m.uniforms.uVelocity.value = velocity
+    })
+  }
 }
 
-postProcessing(shader, (m) => {
-  watch(velocity, (velocity) => {
-    m.uniforms.uVelocity.value = velocity
-  })
-})
+postProcessing(shader)
 </script>
 ```
