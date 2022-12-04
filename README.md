@@ -109,7 +109,7 @@ Most of the time you will probably want more than one image. And these multiple 
 ```vue
 <script setup>
 import { watch } from 'vue'
-import { Moon, useScroll } from "moonbow"
+import { Moon, useScroll, defaultGLSL } from "moonbow"
 import "moonbow/dist/style.css"
 
 import vertexShader from '../shaders/scrollDeform/vertex.glsl'
@@ -144,6 +144,7 @@ defaultGLSL({
 ```
 
 ## :dna: Primitives
+Moonbow exposes the underlying primitives developed to make the Moon image component. You can easily use these primitives to build your own solution. Below is the entire code for the Moon component showcasing the way it uses the primities. 
 ```vue
 <script setup>
 import { ref, onMounted  } from "vue"
