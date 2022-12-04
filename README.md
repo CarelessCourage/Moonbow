@@ -105,6 +105,44 @@ const uniformControls = {
 </template>
 ```
 
+Most of the time you will probably want more than one image. And these multiple images probably will use the same effect, sometimes maybe even in different files. Setting the same shader object over and over can be cumbersome. So I've provided a function for setting the default shader for all images. Just set this once and never worry about setting it again unless you want to overwrite the defaults on a specific image.
+```vue
+<script setup>
+import { watch } from 'vue'
+import { Moon, useScroll } from "moonbow"
+import "moonbow/dist/style.css"
+
+import vertexShader from '../shaders/scrollDeform/vertex.glsl'
+import fragmentShader from '../shaders/scrollDeform/fragment.glsl'
+
+let uniforms = {
+  uVelocity: { value: 0 },
+}
+
+const scroll = useScroll()
+function uniformAction(material: any) {
+  watch(scroll, (s) => {
+    material.uniforms.uVelocity.value = s
+  })
+}
+
+defaultGLSL({
+  uniforms,
+  vertexShader,
+  fragmentShader,
+  uniformAction
+})
+</script>
+
+<template>
+  <Moon src="https://images.unsplash.com/photo-1642059893618"/>
+  <Moon src="https://images.unsplash.com/photo-1642059893618"/>
+  <Moon src="https://images.unsplash.com/photo-1642059893618"/>
+  <Moon src="https://images.unsplash.com/photo-1642059893618"/>
+  <Moon src="https://images.unsplash.com/photo-1642059893618"/>
+</template>
+```
+
 ## :dna: Primitives
 ```vue
 <script setup>

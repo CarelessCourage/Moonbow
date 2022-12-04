@@ -1,6 +1,5 @@
 import { shallowRef } from 'vue'
-import * as THREE from 'three';
-import type { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import * as THREE from 'three'
 
 import { getCamera } from './camera.js'
 import { onResize } from './utils'

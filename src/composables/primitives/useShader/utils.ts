@@ -44,15 +44,16 @@ export function getShader(params: MoonbowShader) {
   return material
 }
 
-function deleteUndefinedProperties(obj: any) {
+function deleteUndefinedProperties(obj?: any) {
   for(let key in obj) {
     if(obj[key] === undefined) delete obj[key]
   }
 }
 
-export function organizeShader(s: MoonbowShader, ds = defaultShader) {
+export function organizeShader(s?: MoonbowShader, ds = defaultShader) {
   deleteUndefinedProperties(s)
-  const uniforms = {...ds.uniforms, ...s.uniforms}
+  const uniforms = {...ds.uniforms, ...s?.uniforms}
   const shader = {...ds, ...s}
-  return {...shader, uniforms}
+  const ss = {...shader, uniforms}
+  return ss
 }

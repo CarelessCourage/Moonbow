@@ -51,6 +51,5 @@ img {
   object-fit: cover;
   overflow: hidden;
 }
-
 img.proxy { opacity: 0; }
 </style>

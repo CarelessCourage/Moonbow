@@ -15,10 +15,17 @@ import fragmentShader2 from '@/shaders/bottomScale/fragment.glsl'
 postProcessing({
   vertexShader: vertexShader2,
   fragmentShader: fragmentShader2,
-}, false)
+})
 
 let uniforms = {
   uVelocity: { value: 0 },
+}
+
+const scroll = useScroll()
+function uniformAction(material: any) {
+  watch(scroll, (s) => {
+    material.uniforms.uVelocity.value = s
+  })
 }
 
 defaultGLSL({
@@ -27,22 +34,13 @@ defaultGLSL({
   fragmentShader,
   uniformAction
 })
-
-function uniformAction(material: any) {
-  watch(useScroll(), (scroll) => {
-    material.uniforms.uVelocity.value = scroll
-  })
-}
 </script>
 
 <template>
-  <div>
+  <div class="moonbow-wrapper">
     <h1 class="logo">moonbow</h1>
     <div class="banner">
-      <Moon 
-        :src="images[0]"
-        :uniformAction="uniformAction"
-      />
+      <Moon  :src="images[0]"/>
     </div>
     <div class="page">
       <ManyMoons :images="images"/>
@@ -51,7 +49,13 @@ function uniformAction(material: any) {
 </template>
 
 <style lang="scss">
-.logo {
+.moonbow-wrapper {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.moonbow-wrapper .logo {
+  pointer-events: none;
   font-size: 9rem;
   position: fixed;
   z-index: 99;
@@ -62,11 +66,11 @@ function uniformAction(material: any) {
   width: min-content;
 }
 
-.banner {
+.moonbow-wrapper .banner {
   padding: 25px;
 }
 
-.banner img {
+.moonbow-wrapper .banner img {
   width: 100%;
   height: 100vh;
   object-fit: cover;
