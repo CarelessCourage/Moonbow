@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<{
 })
 
 onMounted(() => {
+  const src = props.src;
   const element = imageRef.value
   const scene = sceneRef.value
   const shader: MoonbowShader = {
@@ -33,7 +34,7 @@ onMounted(() => {
 
   const material = useShader(element, shader)
   const proxy = useImage({scene, element, material})
-  syncProxyHTML({ proxy, src: props.src })
+  syncProxyHTML({ proxy, src })
 })
 </script>
 
