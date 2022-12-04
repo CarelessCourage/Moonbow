@@ -22,6 +22,13 @@ defineProps<{images: any}>()
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
   max-width: 100%;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .image-container {

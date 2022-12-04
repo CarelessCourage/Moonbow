@@ -23,6 +23,7 @@ export function syncProxyHTML({proxy, src}: propInterface) {
   })
 
   element && observer.observe(element)
+
   onFrame(() => 
     (refresh && element && plane) 
       ? attach(plane, element) 

@@ -67,6 +67,10 @@ defaultGLSL({
   transform: translate(-50%, -50%);
   min-width: 100vw;
   text-align: center;
+  @media screen and (max-width: 768px) {
+    font-size: 7rem;
+  }
+
 }
 
 .moonbow-wrapper .banner img {
