@@ -163,23 +163,19 @@ const props = defineProps({
 const imageRef = ref(null)
 
 onMounted(() => {
-  const shader = {
+  const src = props.src;
+  const element = imageRef.value
+  const scene = sceneRef.value
+  const shader: MoonbowShader = {
     vertexShader: props.vertexShader,
     fragmentShader: props.fragmentShader,
-    uniforms: props.uniforms
+    uniforms: props.uniforms,
+    uniformAction: props.uniformAction
   }
 
-  const material = useShader(imageRef.value, shader)
-  const proxy = useImage({
-    scene: scene.value, 
-    element: imageRef.value, 
-    material
-  })
-
-  syncProxyHTML({
-    proxy,
-    src: props.src,
-  })
+  const material = useShader(element, shader)
+  const proxy = useImage({scene, element, material})
+  syncProxyHTML({ proxy, src })
 })
 </script>
 
@@ -198,14 +194,14 @@ import { postProcessing } from '../composables/canvas'
 import vertexShader from '../shaders/bottomScale/vertex.glsl';
 import fragmentShader from '../shaders/bottomScale/fragment.glsl';
 
-const postUniforms = {
+const uniforms = {
   uExample: { value: 0 },
 }
 
 postProcessing({
-  uniforms: defaultUniforms,
-  vertexShader: vertexShader2,
-  fragmentShader: fragmentShader2,
+  uniforms,
+  vertexShader,
+  fragmentShader,
 })
 </script>
 ```
@@ -218,14 +214,14 @@ import { postProcessing } from '../composables/canvas'
 import vertexShader from '../shaders/bottomScale/vertex.glsl';
 import fragmentShader from '../shaders/bottomScale/fragment.glsl';
 
-const postUniforms = {
+const uniforms = {
   uExample: { value: 0 },
 }
 
 const shader = {
-  uniforms: postUniforms,
-  vertexShader: vertexShader,
-  fragmentShader: fragmentShader,
+  uniforms,
+  vertexShader,
+  fragmentShader,
   uniformAction: (m) => {
     watch(velocity, (velocity) => {
       m.uniforms.uVelocity.value = velocity
