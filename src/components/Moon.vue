@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted  } from "vue"
-import { proxySync } from "../composables/primitives/proxySync"
+import { syncProxyHTML } from "../composables/primitives/proxySync"
 
 import useShader from "../composables/primitives/useShader";
+import type { MoonbowShader, ShaderType } from "../composables/primitives/useShader/utils";
 import scene from "../composables/scene";
 import { useImage } from "../composables/primitives/usePlane";
-
-import vertexShader from '../shaders/default/vertex.glsl';
-import fragmentShader from '../shaders/default/fragment.glsl';
 
 const imageRef = ref(null);
 
@@ -15,27 +13,21 @@ const props = withDefaults(defineProps<{
   src: string;
   width?: number | string;
   height?: number | string;
-  alt?: string;
   vertexShader?: string;
   fragmentShader?: string;
   uniforms?: any;
-  uniformAction?: (material: THREE.ShaderMaterial) => void;
+  uniformAction?: (material: ShaderType) => void;
 }>(), {
-  src: undefined,
   width: 300,
   height: 300,
-  alt: undefined,
-  fragmentShader,
-  vertexShader,
-  uniforms: {},
-  uniformAction: () => {}
 })
 
 onMounted(() => {
-  const shader = {
+  const shader: MoonbowShader = {
     vertexShader: props.vertexShader,
     fragmentShader: props.fragmentShader,
-    uniforms: props.uniforms
+    uniforms: props.uniforms,
+    uniformAction: props.uniformAction
   }
 
   const material = useShader(imageRef.value, shader)
@@ -45,10 +37,7 @@ onMounted(() => {
     material
   })
 
-  proxySync({ proxy, src: props.src })
-
-  if(!material) return
-  props.uniformAction && props.uniformAction(material)
+  syncProxyHTML({ proxy, src: props.src })
 })
 </script>
 

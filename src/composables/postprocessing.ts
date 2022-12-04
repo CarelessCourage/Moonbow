@@ -1,23 +1,27 @@
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 import vertexShader from '../shaders/bottomScale/vertex.glsl';
 import fragmentShader from '../shaders/bottomScale/fragment.glsl';
 
 import { onFrame, onResize, setWindow } from './utils'
+import { 
+  organizeShader, 
+  getShadePass, 
+  type MoonbowShader
+} from './primitives/useShader/utils'
 
-const defaultUniforms = {
+const uniforms = {
   uTime: { value: 0 },
   tDiffuse: { value: null },
   uResolution: { value: new THREE.Vector2() }
 }
 
-export const defaultShader = {
-  uniforms: defaultUniforms,
+export const defaultShader: MoonbowShader = {
+  uniforms,
   vertexShader,
-  fragmentShader,
+  fragmentShader
 }
 
 interface composerInterface {
@@ -28,17 +32,16 @@ interface composerInterface {
 
 interface postProcessingInterface {
   context: composerInterface,
-  shader?: THREE.ShaderMaterial
-  uniformAction?: (material: ShaderPass) => void
+  shader: MoonbowShader,
 }
 
-export function getComposer({context, shader, uniformAction}: postProcessingInterface) {
-  const composer = usePostProcessing({context, shader, uniformAction}) 
+export function getComposer({context, shader}: postProcessingInterface) {
+  const composer = usePostProcessing({context, shader}) 
   onResize(() => setWindow(composer))
   return composer
 }
 
-function usePostProcessing({context, shader, uniformAction}: postProcessingInterface) {
+function usePostProcessing({context, shader}: postProcessingInterface) {
   const { renderer, scene, camera } = context
 
   const composer = new EffectComposer(renderer)
@@ -50,24 +53,14 @@ function usePostProcessing({context, shader, uniformAction}: postProcessingInter
 
   const clock = new THREE.Clock()
 
-  const compiledUniforms = {
-    ...defaultUniforms,
-    ...shader?.uniforms
-  }
-
-  const compiledShader = {
-    ...defaultShader, 
-    ...shader
-  }
-
-  const shaderPass = new ShaderPass({...compiledShader, uniforms: compiledUniforms})
+  const organizedShader = organizeShader(shader, defaultShader)
+  const shaderPass = getShadePass(organizedShader)
 
   onFrame(() => {
     const elapsedTime = clock.getElapsedTime()
     shaderPass.uniforms.uTime.value = elapsedTime
   })
 
-  if(uniformAction) uniformAction(shaderPass)
   composer.addPass(shaderPass)
   return composer
 }

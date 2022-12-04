@@ -6,7 +6,7 @@ interface propInterface {
   proxy: planeInterface
 }
 
-export function proxySync({proxy, src}: propInterface) {
+export function syncProxyHTML({proxy, src}: propInterface) {
   const { plane, attach, element } = proxy
   let refresh = true
 

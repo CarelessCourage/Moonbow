@@ -2,7 +2,12 @@ import * as THREE from 'three'
 
 import { windowDimensions } from "../../utils"
 import { onFrame } from "../../utils"
-import { useMaterial } from "./utils"
+import { 
+  getShader, 
+  organizeShader, 
+  type MoonbowShader, 
+  type ShaderType 
+} from "./utils"
 
 const clock = new THREE.Clock()
 
@@ -21,11 +26,19 @@ function recordTime(material: THREE.ShaderMaterial) {
   material.uniforms.uTime.value = elapsedTime
 }
 
-function useShader(element: HTMLImageElement | null, shader?: THREE.ShaderMaterialParameters) {
-  const material =  useMaterial(shader)
+function paramAction(params: MoonbowShader, material: ShaderType) {
+  console.log(params.uniformAction)
+  const uniformAction = params.uniformAction;
+  if(uniformAction) uniformAction(material)
+}
+
+function useShader(element: HTMLImageElement | null, shader?: MoonbowShader) {
+  const organizedShader = shader ? organizeShader(shader) : {}
+  const material =  getShader(organizedShader).clone()
   loadImage(element, material)
   onFrame(() => recordTime(material))
-  return material  
+  paramAction(organizedShader, material)
+  return material
 }
 
 export default useShader

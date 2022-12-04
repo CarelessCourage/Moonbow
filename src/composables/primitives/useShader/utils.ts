@@ -1,36 +1,58 @@
 import * as THREE from 'three'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 
 import vertexShader from '@/shaders/default/vertex.glsl'
 import fragmentShader from '@/shaders/default/fragment.glsl'
 
-let uniforms = {
-  uTime: { value: 0 },
-  uTexture: { value: null },
-  uTextureCover: { value: [0, 1] },
-  uTextureSize: { value: [0, 1] },
-  uScreenSize: { value: [0, 1] }
+export type ShaderType = THREE.ShaderMaterial | ShaderPass
+export interface MoonbowShader extends THREE.ShaderMaterialParameters {
+  uniformAction?: (m: ShaderType) => void
 }
 
-const defaultParams = {
-  uniforms,
+let defaultShader: MoonbowShader = {
   vertexShader,
   fragmentShader,
-  wireframe: false,
+  uniforms: {
+    uTime: { value: 0 },
+    uTexture: { value: null },
+    uTextureCover: { value: [0, 1] },
+    uTextureSize: { value: [0, 1] },
+    uScreenSize: { value: [0, 1] }
+  }
 }
 
-function getShader(params: THREE.ShaderMaterialParameters) {
-  return new THREE.ShaderMaterial(params)
+export function defaultGLSL(params: MoonbowShader) {
+  const organizedShader = organizeShader(params)
+  defaultShader = organizedShader
 }
 
-function customShader(params: THREE.ShaderMaterialParameters) {
-  return getShader({...defaultParams, ...params, uniforms: {
-    ...defaultParams.uniforms,
-    ...params.uniforms
-  }})
+function stripParams(params: MoonbowShader) {
+  const stripAction = {...params}
+  const {uniformAction, ...rest} = stripAction
+  return rest
 }
 
-export function useMaterial(shader?: THREE.ShaderMaterialParameters) {
-  return shader 
-    ? customShader(shader).clone()
-    : getShader({...defaultParams}).clone()
+export function getShadePass(params: MoonbowShader) {
+  const stripAction = stripParams(params)
+  const material: ShaderType = new ShaderPass(stripAction)
+  return material
+}
+
+export function getShader(params: MoonbowShader) {
+  const stripAction = stripParams(params)
+  const material: ShaderType = new THREE.ShaderMaterial(stripAction)
+  return material
+}
+
+function deleteUndefinedProperties(obj: any) {
+  for(let key in obj) {
+    if(obj[key] === undefined) delete obj[key]
+  }
+}
+
+export function organizeShader(s: MoonbowShader, ds = defaultShader) {
+  deleteUndefinedProperties(s)
+  const uniforms = {...ds.uniforms, ...s.uniforms}
+  const shader = {...ds, ...s}
+  return {...shader, uniforms}
 }

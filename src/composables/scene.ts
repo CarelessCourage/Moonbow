@@ -6,31 +6,25 @@ import { getCamera } from './camera.js'
 import { onResize } from './utils'
 import { setWindow } from './utils'
 import { getComposer, defaultShader } from './postprocessing.js'
+import type { MoonbowShader } from './primitives/useShader/utils'
 
-type actionType = (material: ShaderPass) => void
 interface optionsInterface {
   postProcessing: boolean,
-  uniformAction: actionType
-  shader: any
+  shader: MoonbowShader
 }
 
 const options: optionsInterface = {
   postProcessing: false,
   shader: defaultShader,
-  uniformAction: (material: ShaderPass) => {}
 }
 
 let scene = shallowRef<THREE.Scene | null>(null)
 scene.value = initCanvas()
 
-export function postProcessing(shader?: any, uniformAction?: actionType) {
+export function postProcessing(shader: MoonbowShader, toggle = true) {
+  if(!shader || !toggle) return
   options.postProcessing = true
-  
-  if(!shader) return
   options.shader = shader
-
-  if(!uniformAction) return
-  options.uniformAction = uniformAction
 }
 
 function initCanvas(root = document.body) {
@@ -46,7 +40,7 @@ function initCanvas(root = document.body) {
   onResize(() => setWindow(renderer))
 
   const context = { renderer, scene, camera }
-  const composer = getComposer({context, uniformAction: options.uniformAction})
+  const composer = getComposer({context, shader: options.shader})
 
   renderer.setAnimationLoop(() => {
     options.postProcessing
