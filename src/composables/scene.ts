@@ -30,10 +30,15 @@ function initCanvas(root = document.body) {
   const scene = new THREE.Scene() 
   const camera = getCamera()
   
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-  renderer.setClearColor(0x009900, 0)
+  const renderer = new THREE.WebGLRenderer({ 
+    alpha: true, 
+    antialias: true,
+    premultipliedAlpha: false,
+  })
+  renderer.setClearColor(0x000000, 0); 
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  //renderer.autoClear=false
 
   root.appendChild(renderer.domElement)
   onResize(() => setWindow(renderer))

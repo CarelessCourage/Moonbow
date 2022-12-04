@@ -1,20 +1,11 @@
 :root {
-  --background: #f3f6ea;
-  --foreground: #3e505b;
-
+  --background: #202529;
+  --foreground: #f3f6ea;
   --brand: #368f8b;
-  --shade: #dbdcd7;
-
-  --success: #6BFFB8;
-  --warnings: #CF4D6F;
+  --shade: #868783;
 }
 
 html {
   background: var(--background);
   color: var(--foreground);
-  filter: invert(100%);
-  canvas {
-    filter: invert(100%);
-  }
-  
 }

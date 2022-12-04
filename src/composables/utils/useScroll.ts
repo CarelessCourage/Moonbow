@@ -37,14 +37,21 @@ export function useScroll() {
     speed.value = getVelocity()
   })
 
-   //reduce speed to 0 when not scrolling
-   onFrame(() => {
+  onFrame(() => {
     const change = 0.1
     if(speed.value > 0) speed.value -= change
     if(speed.value < 0) speed.value += change
     const vel = (100 * speed.value)
-    velocity.value += (vel - velocity.value) * 0.1
-   })
+    const add = (vel - velocity.value) * 0.1
+    const addMax = 100
+    const fulMax = 1000
+    velocity.value += clamp(add, -addMax, addMax)
+    velocity.value = clamp(velocity.value, -fulMax, fulMax)
+  })
 
-   return velocity
+  function clamp(value: number, min: number, max: number) {
+    return Math.min(Math.max(value, min), max)
+  }
+
+  return velocity
 }

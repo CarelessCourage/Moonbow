@@ -37,12 +37,12 @@ defineProps<{images: any}>()
     transition: .1s;
   }
   &:hover .meta {
-    background-color: var(--foreground);
+    background-color: var(--shade);
     color: var(--background);
+    border: solid 1px var(--background);
   }
   &:hover {
-    border: solid 1px var(--foreground);
-    border: solid 8px var(--foreground);
+    border: solid 8px var(--shade);
   }
 }
 
@@ -50,6 +50,7 @@ defineProps<{images: any}>()
   display: grid;
   grid-template-columns: 1fr auto;
   background-color: var(--background);
+  text-align: left;
   padding: 12px;
   border: solid 1px var(--foreground);
   transition: .2s;

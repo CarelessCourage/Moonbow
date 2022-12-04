@@ -41,11 +41,3 @@
 .u-radius {
   border-radius: var(--radius, 25px);
 }
-
-.u-invert {
-  filter: invert(90); 
-  img, .img {
-    filter: invert(1);
-    &::after { filter: invert(90) }
-  }
-}

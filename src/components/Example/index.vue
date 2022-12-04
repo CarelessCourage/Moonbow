@@ -15,7 +15,7 @@ import fragmentShader2 from '@/shaders/bottomScale/fragment.glsl'
 postProcessing({
   vertexShader: vertexShader2,
   fragmentShader: fragmentShader2,
-})
+}, false)
 
 let uniforms = {
   uVelocity: { value: 0 },
@@ -61,11 +61,12 @@ defaultGLSL({
   font-size: 9rem;
   position: fixed;
   z-index: 99;
-  color: black;
+  color: var(--foreground);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min-content;
+  min-width: 100vw;
+  text-align: center;
 }
 
 .moonbow-wrapper .banner {

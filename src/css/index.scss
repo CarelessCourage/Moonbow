@@ -14,7 +14,6 @@
 @import "./cube/composition";
 @import "./cube/util";
 
-
 //Handles Canvas
 body > *:not(canvas[data-engine]) {
   position: relative;
