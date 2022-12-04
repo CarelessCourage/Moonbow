@@ -42,7 +42,8 @@ export function useScroll() {
     const change = 0.1
     if(speed.value > 0) speed.value -= change
     if(speed.value < 0) speed.value += change
-    velocity.value = (100 * speed.value)
+    const vel = (100 * speed.value)
+    velocity.value += (vel - velocity.value) * 0.1
    })
 
    return velocity
