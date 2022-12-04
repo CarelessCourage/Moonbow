@@ -1,8 +1,10 @@
 ![chrome-capture-2022-10-20 (2)](https://user-images.githubusercontent.com/12764398/202923488-2abefa21-5d4d-4426-b457-7b8ee446df6e.gif)
 
 # Moonbow :new_moon_with_face:+:rainbow:
-Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire:
+Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire: 
 > :warning: This package is in beta and is therefore most suited for experimentation. Expect issues
+
+Test it out yourself. Head over to [Moonbow](https://moonbow.netlify.app/) to get an idea of whats possible and feel out the performance. 
 
 ## :alembic: How it works
 > Moonbow leverages [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image and sticks it to the size and position of the proxy HTML img element. It re-attatches this plane to the img element on every animation frame to keep it consistent with the layout. But it saves on performance by only attaching the planes that are inside the viewport. It does this by using an intersection observer to check for images in view.
