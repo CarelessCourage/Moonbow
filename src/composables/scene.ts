@@ -35,13 +35,11 @@ function initCanvas(root = document.body) {
     antialias: true,
     premultipliedAlpha: false,
   })
-  renderer.setClearColor(0x000000, 0); 
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  //renderer.autoClear=false
+  renderer.setClearColor(0x902010, 0); 
+  setWindow(renderer)
+  onResize(() => setWindow(renderer))
 
   root.appendChild(renderer.domElement)
-  onResize(() => setWindow(renderer))
 
   const context = { renderer, scene, camera }
   const composer = getComposer({context, shader: options.shader})

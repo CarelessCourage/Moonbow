@@ -52,6 +52,8 @@ void main() {
   float g = gradient(amout, force, direction);
   vec2 newUv = deformedUv(g);
 
+  vec4 textureImage = texture2D(tDiffuse, newUv);
+
   vec3 color = rgbShift(tDiffuse, newUv, 0.0, g );
-  gl_FragColor = vec4(color, 1.0);
+  gl_FragColor = vec4(color, textureImage.a);
 }

@@ -54,19 +54,16 @@ function usePostProcessing({context, shader}: postProcessingInterface) {
   })
 
   const composer = new EffectComposer(renderer, renderTarget)
-  //composer.setSize(window.innerWidth, window.innerHeight)
   composer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
   const renderPass = new RenderPass(scene, camera)
-  //renderPass.clear=false 
+	renderPass.clearAlpha = 0;
   composer.addPass(renderPass)
 
   const clock = new THREE.Clock()
 
   const organizedShader = organizeShader(shader, defaultShader)
   const shaderPass = getShadePass(organizedShader)
-  //shaderPass.material.transparent = true
-
   onFrame(() => {
     const elapsedTime = clock.getElapsedTime()
     shaderPass.uniforms.uTime.value = elapsedTime

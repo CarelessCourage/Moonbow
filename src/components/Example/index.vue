@@ -15,7 +15,7 @@ import fragmentShader2 from '@/shaders/bottomScale/fragment.glsl'
 postProcessing({
   vertexShader: vertexShader2,
   fragmentShader: fragmentShader2,
-}, false)
+}, true)
 
 let uniforms = {
   uVelocity: { value: 0 },
