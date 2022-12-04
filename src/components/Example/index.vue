@@ -49,6 +49,8 @@ defaultGLSL({
 </template>
 
 <style lang="scss">
+@import "../../css";
+
 .moonbow-wrapper {
   max-width: 100vw;
   overflow: hidden;
