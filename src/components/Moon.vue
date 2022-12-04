@@ -4,11 +4,10 @@ import { syncProxyHTML } from "../composables/primitives/proxySync"
 
 import useShader from "../composables/primitives/useShader";
 import type { MoonbowShader, ShaderType } from "../composables/primitives/useShader/utils";
-import scene from "../composables/scene";
+import sceneRef from "../composables/scene";
 import { useImage } from "../composables/primitives/usePlane";
 
 const imageRef = ref(null);
-
 const props = withDefaults(defineProps<{
   src: string;
   width?: number | string;
@@ -23,6 +22,8 @@ const props = withDefaults(defineProps<{
 })
 
 onMounted(() => {
+  const element = imageRef.value
+  const scene = sceneRef.value
   const shader: MoonbowShader = {
     vertexShader: props.vertexShader,
     fragmentShader: props.fragmentShader,
@@ -30,13 +31,8 @@ onMounted(() => {
     uniformAction: props.uniformAction
   }
 
-  const material = useShader(imageRef.value, shader)
-  const proxy = useImage({
-    scene: scene.value, 
-    element: imageRef.value, 
-    material
-  })
-
+  const material = useShader(element, shader)
+  const proxy = useImage({scene, element, material})
   syncProxyHTML({ proxy, src: props.src })
 })
 </script>
