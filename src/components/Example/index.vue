@@ -69,10 +69,6 @@ defaultGLSL({
   text-align: center;
 }
 
-.moonbow-wrapper .banner {
-  padding: 25px;
-}
-
 .moonbow-wrapper .banner img {
   width: 100%;
   height: 100vh;
