@@ -1,6 +1,9 @@
 
 import * as THREE from 'three';
-const defaultMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff22, wireframe: true })
+const defaultMaterial = new THREE.MeshBasicMaterial({ 
+  color: 0x00ff22, 
+  wireframe: true 
+})
 
 type Material = THREE.ShaderMaterial | THREE.MeshBasicMaterial
 interface planeType {

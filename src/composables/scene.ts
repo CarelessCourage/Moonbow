@@ -26,6 +26,16 @@ export function postProcessing(shader: MoonbowShader, toggle = true) {
   options.shader = shader
 }
 
+function hmrUpdate() {
+  //refresh the scene on hmr update
+  if (import.meta.hot) {
+    import.meta.hot.on('vite:beforeUpdate', () => {
+      scene.value && 
+        scene.value.remove.apply(scene, scene.value.children);
+    })
+  }
+}
+
 function initCanvas(root = document.body) {
   const scene = new THREE.Scene() 
   const camera = getCamera()
@@ -50,6 +60,7 @@ function initCanvas(root = document.body) {
       : renderer.render(scene, camera)
   })
 
+  hmrUpdate()
   return scene
 }
 

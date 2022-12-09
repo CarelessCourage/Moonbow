@@ -40,7 +40,10 @@ export function getShadePass(params: MoonbowShader) {
 
 export function getShader(params: MoonbowShader) {
   const stripAction = stripParams(params)
-  const material: ShaderType = new THREE.ShaderMaterial(stripAction)
+  const material: ShaderType = new THREE.ShaderMaterial({
+    ...stripAction, 
+    //wireframe: true
+  })
   return material
 }
 
