@@ -24,7 +24,7 @@ float hoverSin(float time, float amount) {
 void main() {
   vUv = (uv - vec2(0.5))*0.9 + vec2(0.5);
   
-  vec3 pos = defomationCurve(position, vUv, uVelocity / 20.0);
+  vec3 pos = defomationCurve(position, vUv, uVelocity / 4000.0);
 
   //pos.y += hoverCos(uTime, 10.0);
   vUv.y -= hoverSin(uTime, 0.02);

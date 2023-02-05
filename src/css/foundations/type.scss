@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
 
 //Base
 html {
   --font-size: 9px;
   font-weight: 400;
-  font-family: 'Press Start 2P', system-ui;
+  font-family: 'Silkscreen', system-ui;
   font-size: clamp(
     9px,
     2vw, 
