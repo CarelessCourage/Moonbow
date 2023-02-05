@@ -2,7 +2,6 @@
 
 # Moonbow :new_moon_with_face:+:rainbow:
 Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire: 
-> :warning: This package is in beta and is therefore most suited for experimentation. Expect issues and breaking changes
 
 Test it out yourself. Head over to [Moonbow](https://moonbow.netlify.app/) to get an idea of whats possible and feel out the performance. 
 
