@@ -1,6 +1,6 @@
 {
   "name": "moonbow",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vue component for adding GLSL to images",
   "author": "Samuel M. Bednarz<https://github.com/CarelessCourage>",
   "license": "MIT",
