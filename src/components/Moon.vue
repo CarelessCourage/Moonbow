@@ -32,6 +32,7 @@ onMounted(() => {
     uniformAction: props.uniformAction
   }
 
+  if(!window || !document) return
   const material = useShader(element, shader)
   const proxy = useImage({scene, element, material})
   syncProxyHTML({ proxy, src })
@@ -47,7 +48,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 img {
-  opacity: 0.2;
+  opacity: 1;
   object-fit: cover;
   overflow: hidden;
 }
