@@ -4,6 +4,7 @@
 Vue img component for adding [GLSL](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) to images :fire::fire::fire: 
 
 Test it out yourself. Head over to [Moonbow](https://moonbow.netlify.app/) to get an idea of whats possible and feel out the performance. 
+Or jump right into a code example with this [StackBlitz](https://stackblitz.com/edit/vitejs-vite-334uch?file=src%2FApp.vue,src%2Fstyle.css).
 
 ## :alembic: How it works
 > Moonbow leverages [three.js](https://github.com/mrdoob/three.js/) to create a 3D space in webGL. It creates a 3 dimensional plane for each image and sticks it to the size and position of the proxy HTML img element. It re-attatches this plane to the img element on every animation frame to keep it consistent with the layout. But it saves on performance by only attaching the planes that are inside the viewport. It does this by using an intersection observer to check for images in view.
@@ -39,7 +40,7 @@ export default defineConfig({
 ```
 
 ## :crystal_ball: Usage
-Simple example using default GLSL
+Simple example using default GLSL. Here's a [StackBlitz](https://stackblitz.com/edit/vitejs-vite-334uch?file=src%2FApp.vue,src%2Fstyle.css) if you just want to jump right into it as fast as possible.
 ```vue
 <script setup>
 import { Moon } from "moonbow"
