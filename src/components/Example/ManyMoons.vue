@@ -18,6 +18,10 @@ defineProps<{images: any}>()
 
 <style lang="scss">
 .images {
+  --background: #202529;
+  --foreground: #f3f6ea;
+  --shade: #868783;
+  
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 120px;

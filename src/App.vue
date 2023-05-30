@@ -7,7 +7,5 @@ import Example from "./components/Example/index.vue";
 </template>
 
 <style lang="scss">
-@import "./css";
+@import "style.css";
 </style>
-
-

@@ -1,5 +1,5 @@
-import { watch } from 'vue'
-import { useScroll } from '@/index'
+// import { watch } from 'vue'
+// import { useScroll } from '@/index'
 import type { ShaderType, Uniforms } from '@/composables/primitives/useShader/utils'
 
 import { postProcessing } from '@/composables/scene'
@@ -22,36 +22,39 @@ interface ShaderPackage {
   }
 }
 
-let scrollVelocityUniforms = {
-  uVelocity: { value: 0 },
-}
+// let scrollVelocityUniforms = {
+//   uVelocity: { value: 0 },
+// }
 
-const scroll = useScroll()
-function scrollVelocityUniformAction(material: any) {
-  watch(scroll, (s) => {
-    material.uniforms.uVelocity.value = s
-  })
-}
+// const scroll = useScroll()
+// function scrollVelocityUniformAction(material: any) {
+//   watch(scroll, (s) => {
+//     material.uniforms.uVelocity.value = s
+//   })
+// }
 
-export const DeformShader: ShaderPackage = {
+export const deformShader: ShaderPackage = {
   vertexShader: deformVertex,
   fragmentShader: deformFragment,
-  uniforms: scrollVelocityUniforms,
-  uniformAction: scrollVelocityUniformAction,
+  // uniforms: scrollVelocityUniforms,
+  // uniformAction: scrollVelocityUniformAction,
   postprocessing: {
     vertexShader: scaleVertex,
     fragmentShader: scaleFragment,
   }
 }
 
-export function applyShader(shader = DeformShader) {
+export function applyShader(shader?: ShaderPackage) {
   const { 
     fragmentShader, 
     vertexShader, 
     postprocessing,
     uniforms,
     uniformAction
-  } = shader
+  } = {
+    ...deformShader,
+    ...shader,
+  }
 
   defaultGLSL({
     uniforms,

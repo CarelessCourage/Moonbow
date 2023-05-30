@@ -1,10 +1,47 @@
 <script setup lang="ts">
+import { watch } from 'vue'
+import { useScroll } from '@/index'
 import { Moon } from '@/index'
 import ManyMoons from './ManyMoons.vue'
+// import { postProcessing } from '@/composables/scene'
+// import { defaultGLSL } from '@/composables/primitives/useShader/utils'
 import { images, cover } from '@/assets/images'
-import { applyShader } from '@/shaders'
+import { applyShader, deformShader } from '@/shaders'
 
-applyShader()
+const { 
+  fragmentShader, 
+  vertexShader, 
+  // postprocessing,
+} = deformShader
+
+// defaultGLSL({
+//   uniforms,
+//   vertexShader,
+//   fragmentShader,
+//   uniformAction
+// })
+
+// if(postprocessing) {
+//   postProcessing(postprocessing)
+// }
+
+let scrollVelocityUniforms = {
+  uVelocity: { value: 0 },
+}
+
+const scroll = useScroll()
+function scrollVelocityUniformAction(material: any) {
+  watch(scroll, (s) => {
+    material.uniforms.uVelocity.value = s
+  })
+}
+
+applyShader({
+  fragmentShader,
+  vertexShader,
+  uniforms: scrollVelocityUniforms,
+  uniformAction: scrollVelocityUniformAction
+})
 </script>
 
 <template>
@@ -13,14 +50,14 @@ applyShader()
     <div class="banner">
       <Moon :src="cover"/>
     </div>
-    <div class="page">
+    <div>
       <ManyMoons :images="images"/>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-@import "../../css";
+@import "../../style.css";
 
 .moonbow-wrapper {
   max-width: 100vw;
