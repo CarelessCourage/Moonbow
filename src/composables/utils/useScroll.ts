@@ -1,34 +1,35 @@
 import { ref } from 'vue'
 import { onScroll, onFrame } from './'
 
-var checkScrollSpeed = () => {
-  var lastPos: number | null = null
-  var newPos:  number | null = null 
-  var timer = 0 
-  var delta = 0 
-  var delay = 100
-
-  function clear() {
-    lastPos = null;
-    delta = 0;
-  }
-
-  clear();
-  
-  return function() {
-    newPos = window.scrollY;
-    if(lastPos != null) delta = newPos -  lastPos
-    lastPos = newPos;
-    clearTimeout(timer);
-    timer = setTimeout(clear, delay);
-    return delta;
-  };
-}
-
-const getVelocity = checkScrollSpeed()
-const velocity = ref(0)
-
 export function useScroll() {
+  if(typeof window === 'undefined') return ref(0)
+  var checkScrollSpeed = () => {
+    var lastPos: number | null = null
+    var newPos:  number | null = null 
+    var timer = 0 
+    var delta = 0 
+    var delay = 100
+  
+    function clear() {
+      lastPos = null;
+      delta = 0;
+    }
+  
+    clear();
+    
+    return function() {
+      newPos = window.scrollY;
+      if(lastPos != null) delta = newPos -  lastPos
+      lastPos = newPos;
+      clearTimeout(timer);
+      timer = setTimeout(clear, delay);
+      return delta;
+    };
+  }
+  
+  const getVelocity = checkScrollSpeed()
+  const velocity = ref(0)
+
   const scroll = ref(0)
   const speed  = ref(0)
 
