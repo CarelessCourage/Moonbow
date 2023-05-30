@@ -5,7 +5,10 @@ import vertexShader from '@/shaders/default/vertex.glsl'
 import fragmentShader from '@/shaders/default/fragment.glsl'
 
 export type ShaderType = THREE.ShaderMaterial | ShaderPass
+export type Uniforms = THREE.ShaderMaterialParameters['uniforms']
+
 export interface MoonbowShader extends THREE.ShaderMaterialParameters {
+  uniforms?: Uniforms
   uniformAction?: (m: ShaderType) => void
 }
 

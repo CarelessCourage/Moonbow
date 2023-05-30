@@ -1,46 +1,17 @@
 <script setup lang="ts">
-import { watch } from 'vue'
-import { Moon, useScroll } from '../../index'
+import { Moon } from '@/index'
 import ManyMoons from './ManyMoons.vue'
+import images from '@/assets/images'
+import { applyShader } from '@/shaders'
 
-import vertexShader from '@/shaders/scrollDeform/vertex.glsl'
-import fragmentShader from '@/shaders/scrollDeform/fragment.glsl'
-import images from '../../assets/images'
-import { postProcessing } from '../../composables/scene'
-import { defaultGLSL } from '../../composables/primitives/useShader/utils'
-
-import vertexShader2 from '@/shaders/bottomScale/vertex.glsl'
-import fragmentShader2 from '@/shaders/bottomScale/fragment.glsl'
-
-postProcessing({
-  vertexShader: vertexShader2,
-  fragmentShader: fragmentShader2,
-}, true)
-
-let uniforms = {
-  uVelocity: { value: 0 },
-}
-
-const scroll = useScroll()
-function uniformAction(material: any) {
-  watch(scroll, (s) => {
-    material.uniforms.uVelocity.value = s
-  })
-}
-
-defaultGLSL({
-  uniforms,
-  vertexShader,
-  fragmentShader,
-  uniformAction
-})
+applyShader()
 </script>
 
 <template>
   <div class="moonbow-wrapper">
     <h1 class="logo">moonbow</h1>
     <div class="banner">
-      <Moon  :src="images[0]"/>
+      <Moon :src="images[0]"/>
     </div>
     <div class="page">
       <ManyMoons :images="images"/>
