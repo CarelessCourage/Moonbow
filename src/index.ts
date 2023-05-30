@@ -5,6 +5,7 @@ import { useScroll } from "@/composables/utils/useScroll"
 
 import useShader from "@/composables/primitives/useShader"
 import { defaultGLSL } from "@/composables/primitives/useShader/utils"
+import { applyShader } from "@/shaders/"
 import scene from "@/composables/scene"
 import { useImage } from "@/composables/primitives/usePlane"
 import { syncProxyHTML } from "@/composables/primitives/proxySync"
@@ -15,6 +16,7 @@ export {
   onFrame,
   useShader,
   defaultGLSL,
+  applyShader,
   useScroll,
   scene,
   useImage,

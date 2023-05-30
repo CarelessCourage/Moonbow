@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Moon } from '@/index'
 import ManyMoons from './ManyMoons.vue'
-import images from '@/assets/images'
+import { images, cover } from '@/assets/images'
 import { applyShader } from '@/shaders'
 
 applyShader()
@@ -11,7 +11,7 @@ applyShader()
   <div class="moonbow-wrapper">
     <h1 class="logo">moonbow</h1>
     <div class="banner">
-      <Moon :src="images[0]"/>
+      <Moon :src="cover"/>
     </div>
     <div class="page">
       <ManyMoons :images="images"/>

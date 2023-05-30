@@ -61,9 +61,6 @@ export function applyShader(shader = DeformShader) {
   })
   
   if(postprocessing) {
-    postProcessing({
-      vertexShader: postprocessing.vertexShader,
-      fragmentShader: postprocessing.fragmentShader,
-    })
+    postProcessing(postprocessing)
   }
 }

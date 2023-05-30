@@ -19,8 +19,8 @@ defineProps<{images: any}>()
 <style lang="scss">
 .images {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 60px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 120px;
   max-width: 100%;
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);

@@ -8,7 +8,6 @@ float PI = 3.1415926535897932384626433832795;
 
 vec3 defomationCurve(vec3 position, vec2 uv, float offset) {
   position.y -= sin(PI*uv.x) * offset;
-  position.z += sin(PI*uv.x) * offset;
   return position;
 }
 
@@ -26,7 +25,6 @@ void main() {
   
   vec3 pos = defomationCurve(position, vUv, uVelocity / 4000.0);
 
-  //pos.y += hoverCos(uTime, 10.0);
   vUv.y -= hoverSin(uTime, 0.02);
   gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(pos, 1.0);
 }
