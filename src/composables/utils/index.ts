@@ -15,6 +15,22 @@ export function onScroll(fn: () => void) {
   window.addEventListener('scroll', fn)
 }
 
+const beforeRender = new Set<() => void>()
+
+/**
+ * Run `fn` every frame, just before the canvas draws, so whatever it changes shows in
+ * that same frame. Returns a function that stops it.
+ */
+export function onBeforeRender(fn: () => void) {
+  beforeRender.add(fn)
+  return () => { beforeRender.delete(fn) }
+}
+
+/** Called by the render loop, once per frame, before drawing. */
+export function runBeforeRender() {
+  beforeRender.forEach(fn => fn())
+}
+
 export function onFrame(fn: () => void, condition = true) {
   if(condition) requestAnimationFrame(() => onFrame(fn))
   fn()

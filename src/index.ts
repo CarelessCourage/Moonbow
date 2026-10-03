@@ -1,6 +1,6 @@
 import Moon from "@/components/Moon.vue"
 import Example from "@/components/Example/index.vue"
-import { onFrame } from "@/composables/utils"
+import { onFrame, onBeforeRender } from "@/composables/utils"
 import { useScroll } from "@/composables/utils/useScroll"
 
 import useShader from "@/composables/primitives/useShader"
@@ -14,6 +14,7 @@ export {
   Moon,
   Example,
   onFrame,
+  onBeforeRender,
   useShader,
   defaultGLSL,
   applyShader,

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 import { windowDimensions } from "../../utils"
-import { onFrame } from "../../utils"
+import { onBeforeRender } from "../../utils"
 import { 
   getShader,
   organizeShader,
@@ -35,7 +35,8 @@ function useShader(element: HTMLImageElement | null, shader?: MoonbowShader) {
   const organizedShader = {...organizeShader(shader)}
   const material = getShader(organizedShader).clone()
   loadImage(element, material)
-  onFrame(() => recordTime(material))
+  const stop = onBeforeRender(() => recordTime(material))
+  material.addEventListener('dispose', stop)
   paramAction(organizedShader, material)
   return material
 }

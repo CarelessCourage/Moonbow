@@ -2,7 +2,7 @@ import { shallowRef } from 'vue'
 import * as THREE from 'three'
 
 import { getCamera } from './camera.js'
-import { onResize } from './utils'
+import { onResize, runBeforeRender } from './utils'
 import { setWindow } from './utils'
 import { getComposer, defaultShader } from './postprocessing.js'
 import type { MoonbowShader } from './primitives/useShader/utils'
@@ -54,7 +54,9 @@ function initCanvas(root = document.body) {
   const context = { renderer, scene, camera }
   const composer = getComposer({context, shader: options.shader})
 
+  // Planes move to their elements first, then the frame is drawn: no frame of lag.
   renderer.setAnimationLoop(() => {
+    runBeforeRender()
     options.postProcessing
       ? composer.render()
       : renderer.render(scene, camera)
